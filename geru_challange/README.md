@@ -30,17 +30,39 @@ pytest
 ## Site URLS
 - home
 
-url:localhost/
+    url:localhost/
 
 - quotes: show a list of quotes
 
-url:localhost/quotes
+    url:localhost/quotes
 
 - random_quote: show a random quote
 
-url:localhost/quotes/random
+    url:localhost/quotes/random
 
 - quote (specific): show the quote selected by the user 
 
-url:localhost/quotes/{desire quote number}
+    url:localhost/quotes/{number of desire quote}
+
+## Endpoint
+
+-- Session Logs
+
+    Method ('GET')
+    localhost/sessionlogs
+    
+    return a Json
+
+    Json example: [
+        {
+            'identifier':string,
+            'url':string,
+            'datahora':string
+        },
+        {
+            'identifier':string,
+            'url':string,
+            'datahora':string
+        }
+    ]
 

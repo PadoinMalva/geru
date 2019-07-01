@@ -67,6 +67,5 @@ def session_log(request):
             'url':session_obj.url,
             'datahora':session_obj.datahora.isoformat()
         })
-
     response = json.dumps(response_obj)
     return Response(json_body=json.loads(response))
