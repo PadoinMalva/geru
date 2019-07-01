@@ -1,0 +1,3 @@
+[run]
+source = geru_challange
+omit = geru_challange/test*
