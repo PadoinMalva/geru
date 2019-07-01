@@ -1,7 +1,7 @@
 from pyramid.view import view_config
 from pyramid.response import Response
 import json
-from random import choice
+from random import randrange
 import transaction
 from ..helpers.quotes.quotes import get_quotes, get_quote
 from ..models.mymodel import SessionLog, DBSession
@@ -23,35 +23,40 @@ def check_session(session, url):
     return check_session
 
 
-@view_config(route_name='home', renderer='json')
+@view_config(route_name='home', renderer='./templates/home.jinja2')
 def home(request):
     session = check_session(request.session, request.url)
-    return Response('Desafio Web 1.0')
+    return dict(title='Desafio Web 1.0!')
 
 
-@view_config(route_name='quotes', renderer='json')
+@view_config(route_name='quotes', renderer='./templates/quotes.jinja2')
 def quotes(request):
     session = check_session(request.session, request.url)
     quotes = get_quotes()
-    return quotes['quotes']
+    return quotes
 
-@view_config(route_name='quotes_number', renderer='json')
+@view_config(route_name='quotes_number', renderer='./templates/quotes_number.jinja2')
 def quotes_number(request):
-    print(request.url)
+    session = check_session(request.session, request.url)
     quote_number = request.matchdict
     response = get_quote(quote_number['first'])
-    print(response)
-    return response['quote']
+    response['quote_number'] = quote_number['first']
+    return response
     
-@view_config(route_name='quotes_random', renderer='json')
+@view_config(route_name='quotes_random', renderer='./templates/quotes_number.jinja2')
 def quotes_random(request):
+    session = check_session(request.session, request.url)
     random_quotes = get_quotes()
-    return choice(random_quotes['quotes'])
+    random_index = randrange(len(random_quotes['quotes']))
+    response = {
+        'quote_number':random_index,
+        'quote': random_quotes['quotes'][random_index]
+    }
+    return response
 
 @view_config(route_name='session_log', renderer='json')
 @get_check
 def session_log(request):
-    print('>>>>>>>>>>>>>>><<<<<<<<<<<<<<',request.method)
     for x in request.headers:
         print(x)
     retorno = DBSession.query(SessionLog).all()

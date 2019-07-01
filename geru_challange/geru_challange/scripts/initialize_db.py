@@ -1,9 +1,7 @@
 import argparse
 import sys
-
 from pyramid.paster import bootstrap, setup_logging
 from sqlalchemy.exc import OperationalError
-
 from .. import models
 
 
