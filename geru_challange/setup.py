@@ -20,6 +20,7 @@ requires = [
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
+    'requests',
 ]
 
 tests_require = [
