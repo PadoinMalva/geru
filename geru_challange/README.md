@@ -29,17 +29,18 @@ pytest
 
 ## Site URLS
 - home
-bash
-localhost/
+
+url:localhost/
 
 - quotes: show a list of quotes
-bash
-localhost/quotes
+
+url:localhost/quotes
 
 - random_quote: show a random quote
-bash
-localhost/quotes/random
+
+url:localhost/quotes/random
 
 - quote (specific): show the quote selected by the user 
-bash
-/quotes/{desire quote number}
+
+url:localhost/quotes/{desire quote number}
+
